@@ -24,7 +24,7 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+This module handles operations related to Habits, including creating, updating, archiving, marking as completed, and retrieving habits. It is designed to manage the lifecycle of habits, track their completion status, and allow for custom sorting and filtering of habits
 
 ## Project setup
 
