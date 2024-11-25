@@ -24,7 +24,7 @@
 
 ## Description
 
-This module handles operations related to Habits, including creating, updating, archiving, marking as completed, and retrieving habits. It is designed to manage the lifecycle of habits, track their completion status, and allow for custom sorting and filtering of habits
+This module handles operations related to Habits, including creating, updating, archiving, marking as completed, and retrieving habits. It is designed to manage the lifecycle of habits, track their completion status, and allow for custom sorting and filtering of habits. Instead of using a cron job to calculate streaks, the streak is calculated in real-time when a habit is marked as completed, providing immediate feedback without the need for periodic tasks.
 
 ## Project setup
 
