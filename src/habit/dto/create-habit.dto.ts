@@ -1,7 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import {
   IsString,
-  IsNotEmpty,
   IsOptional,
   IsArray,
   IsBoolean,
@@ -11,7 +10,6 @@ import {
 export class CreateHabitDto {
   @ApiProperty({ description: 'Title of the habit', example: 'Morning Run' })
   @IsString()
-  @IsNotEmpty()
   title: string;
 
   @ApiProperty({

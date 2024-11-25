@@ -4,23 +4,23 @@ import { Document } from 'mongoose';
 
 @Schema({ timestamps: true })
 export class Habit extends Document {
-  @Prop({ required: true })
+  @Prop()
   title: string;
 
   @Prop({ default: '' })
   description: string;
 
   @Prop({ type: [Date], default: [] })
-  completedDates: Date[]; // Dates when the habit was marked as completed
+  completedDates: Date[];
 
   @Prop({ default: 0 })
-  streak: number; // Current streak of consecutive days
+  streak: number;
 
   @Prop({ default: false })
   isArchived: boolean;
 
   @Prop({ default: 0 })
-  priority: number; // Priority for sorting
+  priority: number;
 }
 
 export const HabitSchema = SchemaFactory.createForClass(Habit);

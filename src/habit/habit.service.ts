@@ -34,7 +34,7 @@ export class HabitService {
     page: number,
     limit: number,
     title?: string,
-    sortBy: SortBy = SortBy.CREATED_AT, // Default to createdAt
+    sortBy: SortBy = SortBy.CREATED_AT,
     orderBy: 'asc' | 'desc' = 'desc',
   ): Promise<any> {
     const query: any = { isArchived: false };
@@ -78,6 +78,11 @@ export class HabitService {
     return habit.save();
   }
 
+  async getArchivedHabits(): Promise<Habit[]> {
+    return this.habitModel.find({ isArchived: true }).sort({ updatedAt: -1 }).exec();
+  }
+  
+
   async markAsCompleted(id: string): Promise<Habit> {
     const habit = await this.habitModel.findById(id);
 
@@ -86,7 +91,7 @@ export class HabitService {
     }
 
     const today = new Date();
-    today.setHours(0, 0, 0, 0); // Ensure only the date is compared
+    today.setHours(0, 0, 0, 0);
 
     const alreadyCompleted = habit.completedDates.some(
       (date) => new Date(date).getTime() === today.getTime(),
@@ -130,7 +135,7 @@ export class HabitService {
       previousDate = date;
     }
 
-    habit.streak = streak; // Update the streak in the habit document
+    habit.streak = streak;
     await habit.save();
     return streak;
   }

@@ -22,6 +22,14 @@ export class HabitController {
   create(@Body() createHabitDto: CreateHabitDto) {
     return this.habitService.create(createHabitDto);
   }
+
+  @Get('archived')
+  @ApiOperation({ summary: 'Get all archived habits' })
+  async getArchivedHabits() {
+    return this.habitService.getArchivedHabits();
+  }
+
+  
   @Get(':id')
   @ApiOperation({ summary: 'Get Single Habit' })
   findOne(@Param('id') id: string) {
@@ -79,7 +87,15 @@ export class HabitController {
   @Patch(':id/complete')
   @ApiOperation({ summary: 'Mark habit as completed for today' })
   @ApiParam({ name: 'id', description: 'ID of the habit' })
-  markAsCompleted(@Param('id') id: string) {
-    return this.habitService.markAsCompleted(id);
+  async markAsCompleted(@Param('id') id: string) {
+    const habit = await this.habitService.markAsCompleted(id);
+    const updatedStreak = await this.habitService.calculateStreak(id);
+    return {
+      message: 'Habit marked as completed and streak updated',
+      habit: {
+        ...habit.toObject(),
+        streak: updatedStreak,
+      },
+    };
   }
 }
